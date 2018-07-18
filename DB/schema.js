@@ -19,6 +19,7 @@ let user = new mongoose.Schema({
     flowerpot:{
         temperature: {
             normal_data: Number,
+            standard_data : Number,
             average_date : Number
         },
         flowerpot_humidity: {
@@ -31,4 +32,8 @@ let user = new mongoose.Schema({
         },
         overall: { type : String }
     }
-})
+});
+
+let usermodel = mongoose.model('usermodel',user);
+
+exports.User = usermodel;
