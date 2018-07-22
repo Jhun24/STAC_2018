@@ -89,7 +89,7 @@ function auth(app) {
                     friend_list:Object
                 });
 
-                saveUser.save((err,model)=>{
+                saveUser.save((err,moㄴㅁdel)=>{
                     if(err) throw err;
                     cb(null);
                 });
