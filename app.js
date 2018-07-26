@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/auth')(app);
 require('./routes/data')(app);
+require('./routes/books')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -34,6 +34,18 @@ let user = new mongoose.Schema({
     }
 });
 
+let books = new mongoose.Schema({
+    title: { type : String },
+    link : { type : String },
+    image : { type : String },
+    author : { type : String },
+    description : { type : String },
+    publisher : { type : String },
+    price : { type : String },
+})
+
 let usermodel = mongoose.model('usermodel',user);
+let bookModel = mongoose.model('book',books);
 
 exports.User = usermodel;
+exports.Books = bookModel;
