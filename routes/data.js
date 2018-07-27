@@ -39,7 +39,7 @@ function data(app) {
         });
     });
 
-    app.get('/data/user/:token',(req,res)=>{
+    app.get('/data/user/:token',(reqsres)=>{
         "use strict";
         let token = req.params.token;
         
