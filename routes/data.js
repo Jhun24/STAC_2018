@@ -10,7 +10,7 @@ const Logger = require('../func/color').Logger;
 function data(app) {
     app.get('/data/flowerpot/:token',(req,res)=>{
         "use strict";
-        var token = req.params.token;
+        let token = req.params.token;
         async.waterfall([
             function (cb) {
                 User.find({token:token},(err,model)=>{
@@ -41,7 +41,7 @@ function data(app) {
 
     app.get('/data/user/:token',(req,res)=>{
         "use strict";
-        var token = req.params.token;
+        let token = req.params.token;
         
         async.waterfall([
             function (cb) {
@@ -66,6 +66,50 @@ function data(app) {
                 res.send({
                     status:status,
                     data:data
+                });
+            }
+        });
+    });
+
+    app.post('/data/flowerpot/update/humidity',(req,res)=>{
+        let token = req.body.token;
+        let normal_data = req.body.normal_data;
+
+        async.waterfall([
+            function (cb){
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , "Unauthorized Token");
+                    }
+                    else{
+                        cb(null , model[0].flowerpot_humidity);
+                    }
+                });
+            },
+            function (humidity , cb){
+                let update_average = (normal_data + humidity.average_date) / 2;
+                User.update({token:token},{$set:{
+                    flowerpot_humidity:{
+                        normal_data: normal_data,
+                        average_date : update_average
+                    }
+                }},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , "Update Success");
+                });
+            }
+        ],function(cb , status , data){
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    stauts:status,
+                    message:data
                 });
             }
         });
