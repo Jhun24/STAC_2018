@@ -114,4 +114,50 @@ function data(app) {
             }
         });
     });
+
+
+    app.post('/data/flowerpot/update/periphery',(req,res)=>{
+        let token = req.body.token;
+        let normal_data = req.body.normal_data;
+
+        async.waterfall([
+            function (cb){
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , "Unauthorized Token");
+                    }
+                    else{
+                        cb(null , model[0].periphery_humidity);
+                    }
+                });
+            },
+            function (periphery , cb){
+                let update_average = (normal_data + periphery.average_date) / 2;
+                User.update({token:token},{$set:{
+                    periphery_humidity:{
+                        normal_data: normal_data,
+                        average_date : update_average
+                    }
+                }},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , "Update Success");
+                });
+            }
+        ],function(cb , status , data){
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    stauts:status,
+                    message:data
+                });
+            }
+        });
+    });
+    
 }
