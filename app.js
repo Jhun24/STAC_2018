@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 
+let passport = require('passport');
+
 var app = express();
 
 // view engine setup
@@ -15,10 +17,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+    done(null, user.id);
+});
+passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+        done(null, user);
+    });
+});
 
 require('./routes/auth')(app);
 require('./routes/data')(app);
 require('./routes/books')(app);
+require('./routes/kakak_passport')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

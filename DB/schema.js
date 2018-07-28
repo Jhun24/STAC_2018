@@ -12,6 +12,7 @@ db.once('open', function callback () {
 });
 
 let user = new mongoose.Schema({
+    auth_type : { type : String },
     id: { type : String },
     password: { type : String },
     token: { type : String },

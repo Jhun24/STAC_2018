@@ -77,19 +77,30 @@ function auth(app) {
             },
             function (cb) {
                 let saveUser = new User({
+                    auth_type:'normal',
                     id:id,
                     password:password,
                     name:name,
                     token:token,
-                    user_point:0,
-                    user_record:{
-                        user_late_time:0,
-                        user_fine:0,
-                    },
-                    friend_list:Object
+                    flowerpot:{
+                        temperature: {
+                            normal_data: 0,
+                            standard_data : 0,
+                            average_date : 0
+                        },
+                        flowerpot_humidity: {
+                            normal_data: 0,
+                            average_date : 0
+                        },
+                        periphery_humidity: {
+                            normal_data: 0,
+                            average_date : 0
+                        },
+                        overall: "비어있음"
+                    }
                 });
 
-                saveUser.save((err,moㄴㅁdel)=>{
+                saveUser.save((err,model)=>{
                     if(err) throw err;
                     cb(null);
                 });
