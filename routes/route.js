@@ -10,13 +10,18 @@ function route(app) {
         res.render('splash.html');
     });
 
-    app.get('/register',(req,res)=>{
+    app.get('/check',(req,res)=>{
         "use strict";
-        res.render('register.html');
+        res.render('check.html');
     });
 
     app.get('/login',(req,res)=>{
         "use strict";
         res.render('login.html')
+    });
+
+    app.get('/register/ward',(req,res)=>{
+        "use strict";
+        res.render("register_normal.html");
     });
 }

@@ -1,0 +1,101 @@
+@import "flex.less";
+@import "font.less";
+
+body{
+  background-image: linear-gradient(#2eec7e,#30ecb1);
+}
+
+.logo-box{
+  width:100%;
+  height:137.25px;
+
+  .flex-center;
+
+  margin-top:100px;
+}
+
+.logo-box > img{
+  width:119.25px;
+  height:137.25px;
+
+  -webkit-filter: drop-shadow( 1px 1px 1px gray );
+  filter: drop-shadow( 1px 1px 1px gray );
+
+}
+
+h4{
+  text-align: center;
+  font-family: NotoKr-Black;
+  font-size:34px;
+  color:#fff;
+  line-height:60px;
+  margin-top:20px;
+}
+
+p{
+  text-align: center;
+  font-family: NotoKr-Regular;
+  font-size:20px;
+  color:#fff;
+  line-height: 30px;
+}
+
+.register-btn{
+  margin:auto;
+  width:70%;
+  height:7%;
+
+  border-radius:5px;
+  background-color: #fff;
+  color:#30ec9f;
+
+  font-size:20px;
+  font-family: NotoKr-Black;
+
+  margin-top:40px;
+
+  .flex-center;
+}
+
+.kakao-btn{
+  margin:auto;
+  width:70%;
+  height:7%;
+
+  border-radius:5px;
+  background-color: rgb(251,236,79);
+  margin-top:20px;
+
+  .flex-center;
+
+  & > div >  div{
+    width:80%;
+    height:100%;
+    .flex-center;
+
+  }
+  & > div >  div > p {
+    color:rgb(68,44,31);
+
+    font-size:14px;
+    font-family: sans-serif;
+    font-weight:600;
+  }
+  & > div{
+    width:80%;
+    height:100%;
+    margin:auto;
+    .flex-align-between;
+
+  }
+}
+
+a{
+  & > p {
+    text-align: center;
+    color:#fff;
+    font-size:16px;
+    line-height: 40px;
+    text-decoration: underline;
+  }
+}
