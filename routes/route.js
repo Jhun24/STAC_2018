@@ -24,4 +24,14 @@ function route(app) {
         "use strict";
         res.render("register_normal.html");
     });
+
+    app.get('/register/guardian',(req,res)=>{
+        "use strict";
+        res.render('register_guardian.html');
+    });
+
+    app.get('/main/ward',(req,res)=>{
+        "use strict";
+        res.render('main_ward.html');
+    });
 }
