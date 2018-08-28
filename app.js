@@ -10,7 +10,9 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'html')
+app.set('views', 'views')
+app.engine('html', require('ejs').renderFile);
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -33,6 +35,7 @@ require('./routes/auth')(app);
 require('./routes/data')(app);
 require('./routes/books')(app);
 require('./routes/kakak_passport')(app);
+require('./routes/route')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
