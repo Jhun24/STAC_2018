@@ -9,6 +9,10 @@ let view_place_translateX = 0;
 let startX = 0;
 let finishX = 0;
 
+window.onload =()=>{
+    "use strict";
+    document.body.requestFullscreen();
+}
 flower_btn.addEventListener('click',function () {
     animate(0);
 });
