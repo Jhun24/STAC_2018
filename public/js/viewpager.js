@@ -22,6 +22,7 @@ setting_btn.addEventListener('click',function () {
 
 view_pagrer.addEventListener('touchmove',function (event) {
     console.log(event);
+    document.getElementById('check').innerHTML = event;
 });
 
 
