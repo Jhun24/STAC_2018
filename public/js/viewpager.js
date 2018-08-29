@@ -11,7 +11,7 @@ let finishX = 0;
 
 window.onload =()=>{
     "use strict";
-    document.body.requestFullscreen();
+    document.body.requestFullscreen;
 }
 flower_btn.addEventListener('click',function () {
     animate(0);
