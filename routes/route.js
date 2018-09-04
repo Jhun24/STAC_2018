@@ -34,4 +34,9 @@ function route(app) {
         "use strict";
         res.render('main_ward.html');
     });
+
+    app.get('/test',(req,res)=>{
+        "use strict";
+        res.render('test.html');
+    });
 }
