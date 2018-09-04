@@ -5,12 +5,8 @@
 module.exports = route;
 
 function route(app) {
-    app.get('/',(req,res)=>{
-        "use strict";
-        res.render('splash.html');
-    });
 
-    app.get('/check',(req,res)=>{
+    app.get('/',(req,res)=>{
         "use strict";
         res.render('check.html');
     });
