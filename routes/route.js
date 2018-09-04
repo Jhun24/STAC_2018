@@ -35,8 +35,4 @@ function route(app) {
         res.render('main_ward.html');
     });
 
-    app.get('/test',(req,res)=>{
-        "use strict";
-        res.render('test.html');
-    });
 }
