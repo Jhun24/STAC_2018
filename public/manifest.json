@@ -1,6 +1,59 @@
 {
   "short_name": "STAC-2018",
   "name": "STAC-2018",
+  "icons":[
+    {
+      "src": "/img/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/book.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/book_pic.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/flower.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/flower_pic.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/mic.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/mic_pic.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/settings.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/settings_pic.svg",
+      "sizes": "20x20",
+      "type": "image/svg"
+    },
+    {
+      "src": "/img/chat.svg",
+      "sizes": "25x25",
+      "type": "image/svg"
+    }
+  ],
+  "start_url":"/main/ward",
   "display": "standalone",
   "orientation": "portrait"
 }

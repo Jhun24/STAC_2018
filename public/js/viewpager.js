@@ -36,14 +36,14 @@ view_pagrer.addEventListener('touchstart',function (e) {
 view_pagrer.addEventListener('touchend',function (e) {
     finishX = e.changedTouches[0].screenX;
 
-    if(finishX - startX > 89 ){
+    if(startX - finishX > 89 ){
         if(view_place_translateX != -75){
             view_place_translateX = view_place_translateX - 25;
             view_pagrer.style.transitionDuration = '1s';
             view_pagrer.style.transform = "translateX("+view_place_translateX+"%)";
         }
     }
-    else if(startX - finishX > 89){
+    else if(finishX - startX > 89){
         if(view_place_translateX != 0){
             view_place_translateX = view_place_translateX + 25;
             view_pagrer.style.transitionDuration = '1s';
