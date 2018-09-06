@@ -60,23 +60,8 @@ function kakao(app) {
     app.get('/auth/kakao',passport.authenticate('kakao'));
 
     app.get('/auth/kakao/callback',passport.authenticate('kakao',{
-        successRedirect: '/auth/kakao/success',
-        failureRedirect: '/auth/kakao/fail'
+        successRedirect: '/main/ward',
+        failureRedirect: '/'
     }));
 
-    app.get('/auth/kakao/success',(req,res)=>{
-        "use strict";
-        res.send({
-            status:200,
-            message:"Auth Success"
-        });
-    });
-
-    app.get('/auth/kakao/fail',(req,res)=>{
-        "use strict";
-        res.send({
-            status:200,
-            message:"Auth Fail"
-        });
-    });
 }

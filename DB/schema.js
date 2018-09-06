@@ -17,6 +17,7 @@ let user = new mongoose.Schema({
     password: { type : String },
     token: { type : String },
     name: { type : String },
+    gender: { type : String },
     flowerpot:{
         temperature: {
             normal_data: Number,

@@ -61,6 +61,7 @@ function auth(app) {
         let id = req.body.id;
         let password = req.body.password;
         let name = req.body.name;
+        let gender = req.body.gender;
         let token = random_string.generate();
 
         async.waterfall([

@@ -1,51 +1,53 @@
 @import "flex.less";
-@import "font.less";
 
 body{
   background-image: linear-gradient(#2eec7e,#30ecb1);
 }
 
 .logo-box{
-  width:100%;
+  width:90%;
   height:20%;
 
-  .flex-center;
+  margin:auto;
+
+  .flex-align-between;
 
   & > div{
-    width:auto;
+    width:100%;
     height:91.5px;
-
-    display:flex;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+    .flex-align-between
   }
 
   & > div > img {
-    width:79.5px;
-    height:91.5px;
+    width:63.6px;
+    height:73.2px;
   }
 
   & > div > div{
+    width:calc(~"100% - 79.5px");
     height:100%;
   }
 
   & > div > div > h4{
+    text-align: right;
     font-family: 'Noto Sans KR',sans-serif;
-    font-weight: 900;
-    font-size:34px;
+    font-weight:800;
+    font-size:30px;
     color:#fff;
     margin-left:30px;
   }
 
   & > div > div > p{
+    text-align: right;
     font-family: 'Noto Sans KR',sans-serif;
     font-weight:200;
-    font-size:16px;
+    font-size:14px;
     color:#fff;
     line-height: 30px;
     margin-left:30px;
   }
 }
+
 
 .login-box{
   width:90%;
@@ -60,7 +62,7 @@ body{
 
   & > .header{
     width:90%;
-    height:20%;
+    height:120px;
     margin:auto;
 
     .flex-align-center;
@@ -74,7 +76,7 @@ body{
 
   & > .login-input-box{
     width:90%;
-    height:14%;
+    height:90px;
 
     margin:auto;
 
