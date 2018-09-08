@@ -1,0 +1,140 @@
+@import 'flex.less';
+
+body{
+  background-color: #2eec7e;
+
+  & > .header{
+    width:calc(~"100% - 20px");
+    height:140px;
+
+    padding-left:20px;
+    padding-bottom:20px;
+
+    .flex-align-center;
+
+    & > h4{
+      font-size:30px;
+      font-weight:800;
+      font-family: 'Noto Sans KR', sans-serif;
+      color:#fff;
+    }
+  }
+
+  & > .icon-box{
+    width:100%;
+    height:60px;
+    //
+    //margin-top:50px;
+    margin-bottom:0px;
+
+    .flex-center;
+
+    & > .icon{
+      width:140px;
+      height:140px;
+      border-radius: 100%;
+      background-color: #fff;
+      box-shadow: 1px 1px 1px 1px #d8d8d8 ,0em 0 0.4em  #d8d8d8;
+
+
+      .flex-center;
+
+      & > img{
+        width:140px;
+        height:140px;
+        border-radius: 100%;
+      }
+    }
+  }
+
+  & > .data-box{
+    width:90%;
+    height:calc(~"100% - 160px");
+    padding-top:70px;
+
+    background-color: #fff;
+    border-radius: 10px 10px 0px 0px;
+
+    margin:auto;
+
+    overflow-y:auto;
+
+    & > .date{
+      width:calc(~"90% - 20px");
+      height:80px;
+
+      padding-left:20px;
+
+      & > p{
+        font-size:20px;
+        font-weight:400;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#c7c7c7;
+        line-height: 40px;
+      }
+
+      & > h4{
+        font-size:30px;
+        font-weigh:800;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#2fec8b;
+      }
+    }
+
+    & > .status{
+      width:calc(~"90% - 20px");
+      height:80px;
+
+      margin-top:20px;
+
+      padding-left:20px;
+      & > p{
+        font-size:20px;
+        font-weight:400;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#c7c7c7;
+        line-height: 40px;
+      }
+
+      & > h4{
+        font-size:20px;
+        font-weigh:300;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#c7c7c7;
+
+        & > strong{
+          font-size:40px;
+          font-weigh:800;
+          font-family: 'Noto Sans KR', sans-serif;
+          color:#2fec8b;
+
+          margin-right:5px;
+        }
+      }
+    }
+
+    & > .data{
+      width:calc(~"90% - 20px");
+      height:auto;
+
+      margin-top:60px;
+
+      padding-left:20px;
+
+      & > h4{
+        font-size:30px;
+        font-weigh:800;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#757575;
+      }
+
+      & > p{
+        font-size:14px;
+        font-weight:400;
+        font-family: 'Noto Sans KR', sans-serif;
+        color:#c7c7c7;
+        line-height: 24px;
+      }
+    }
+  }
+}

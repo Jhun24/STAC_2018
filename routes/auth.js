@@ -26,9 +26,11 @@ function auth(app) {
                     message:"Fail to /auth/login",
                 });
             }else{
+                req.session.token = model[0].token;
                 res.send({
                     status:200,
                     data:{
+                        auth_type:model[0].auth_type,
                         token:model[0].token
                     }
                 });
@@ -49,6 +51,7 @@ function auth(app) {
                     message:"Fail to /auth/login/auto",
                 });
             }else{
+                req.session.token = token;
                 res.send({
                     status:200
                 });
@@ -63,6 +66,7 @@ function auth(app) {
         let name = req.body.name;
         let gender = req.body.gender;
         let token = random_string.generate();
+        let auth_type = req.body.auth_type;
 
         async.waterfall([
             function (cb) {
@@ -78,11 +82,12 @@ function auth(app) {
             },
             function (cb) {
                 let saveUser = new User({
-                    auth_type:'normal',
+                    auth_type:auth_type,
                     id:id,
                     password:password,
                     name:name,
                     token:token,
+                    gender:gender,
                     flowerpot:{
                         temperature: {
                             normal_data: 0,
@@ -114,6 +119,7 @@ function auth(app) {
                 });
             }
             else if(cb == null){
+                req.session.token = token;
                 res.send({
                     status:200,
                     data:{

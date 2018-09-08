@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var morgan = require('morgan');
 
 let passport = require('passport');
+let session = require('express-session');
 
 var app = express();
 
@@ -21,6 +22,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(session({
+    secret:'@#@$MYSIGN#@$#$',
+    resave: false,
+    saveUninitialized:true
+}));
 
 passport.serializeUser((user, done) => {
     done(null, user.id);

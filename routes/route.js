@@ -31,4 +31,30 @@ function route(app) {
         res.render('main_ward.html');
     });
 
+
+    app.get('/main/guardian',(req,res)=>{
+        "use strict";
+        res.render('main_guardian.html');
+    });
+
+    app.get('/show/flower',(req,res)=>{
+        "use strict";
+        res.render("my-flower.html");
+    });
+
+    app.get('/show/ward',(req,res)=>{
+        "use strict";
+        res.render('ward.html');
+    });
+
+    app.get('/show/guardian',(req,res)=>{
+        "use strict";
+        res.render('guardian.html');
+    });
+
+    app.get("/pairing/code",(req,res)=>{
+        "use strict";
+        res.render('pairing.html');
+    });
+
 }

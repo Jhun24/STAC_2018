@@ -19,7 +19,12 @@ login_btn.addEventListener('click',()=>{
             },
             success:function (data) {
                 if(data.status == 200){
-                    location.href = '/main/ward'
+                    if(data.data.auth_type == 'ward'){
+                        location.href = '/main/ward'
+                    }
+                    else if(data.data.auth_type == 'guardian'){
+                        location.href = '/main/guardian'
+                    }
                 }
             },
             error:function (err) {

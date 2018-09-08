@@ -1,0 +1,137 @@
+@import "flex.less";
+
+body{
+  background-color: #2eec7e;
+}
+
+.header{
+  width:calc(~"100% - 20px");
+  height:160px;
+
+  padding-left:20px;
+
+  color:#fff;
+  font-size:40px;
+  font-weight: 800;
+  font-family: 'Noto Sans KR', sans-serif;
+
+  .flex-align-center;
+}
+
+.null{
+  width:100%;
+  height:40px;
+}
+
+.icon-box{
+  width:100%;
+  height:140px;
+
+  & > .top{
+    .flex-center;
+    width:100%;
+    height:0px;
+
+    & > .icon{
+      width:140px;
+      height:140px;
+
+      background-color: #fff;
+      border-radius: 100%;
+      box-shadow: 1px 1px 1px 1px #d8d8d8;
+
+      .flex-center;
+
+      margin-bottom:-0px;
+
+      & > img{
+        width:80px;
+        height:80px;
+      }
+    }
+  }
+
+  & > .bottom{
+    width:100%;
+    height:140px;
+
+    border-top-left-radius: 100% 100%;
+    border-top-right-radius: 100% 100%;
+
+    background-color:#fff;
+  }
+}
+
+.code-box{
+  width:100%;
+  height:calc(~"100% - 260px");
+  background-color: #fff;
+
+  padding-top:20px;
+
+  & > h4{
+    color:#2fec8c;
+    font-size:24px;
+    font-weight:600;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    margin-bottom:10px;
+  }
+
+  & > p{
+    color:#919191;
+    font-size:14px;
+    font-weight:300;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+  }
+
+
+  & > .input-box{
+    width:90%;
+    height:40px;
+
+    margin:auto;
+    margin-top:40px;
+
+    border-bottom:1px solid #d7d7d7;
+
+    .flex-align-between;
+
+    & > input{
+      width:20%;
+      height:95%;
+      border:none;
+      outline:none;
+      font-size:14px;
+
+      text-align: center;
+    }
+
+    & > p{
+      color:#969696;
+      font-size:14px;
+    }
+  }
+
+  & > .pairing-btn{
+    width:50%;
+    height:50px;
+
+    border-radius:20px;
+    background-color: #2eec89;
+
+    box-shadow: 1px 1px 1px 1px #d8d8d8;
+
+    margin:auto;
+    margin-top:50px;
+
+    .flex-center;
+
+    font-size:20px;
+    font-weight:600;
+    font-family: 'Noto Sans KR', sans-serif;
+    color:#fff;
+  }
+
+}

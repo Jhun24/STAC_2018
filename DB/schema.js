@@ -18,22 +18,25 @@ let user = new mongoose.Schema({
     token: { type : String },
     name: { type : String },
     gender: { type : String },
-    flowerpot:{
-        temperature: {
-            normal_data: Number,
-            standard_data : Number,
-            average_date : Number
-        },
-        flowerpot_humidity: {
-            normal_data: Number,
-            average_date : Number
-        },
-        periphery_humidity: {
-            normal_data: Number,
-            average_date : Number
-        },
-        overall: { type : String }
-    }
+    ward_id:{ type : String },
+});
+
+let user_flower = new mongoose.Schema({
+    temperature: {
+        normal_data: Number,
+        standard_data : Number,
+        average_date : Number
+    },
+    flowerpot_humidity: {
+        normal_data: Number,
+        average_date : Number
+    },
+    periphery_humidity: {
+        normal_data: Number,
+        average_date : Number
+    },
+    overall: { type : String }
+
 });
 
 let books = new mongoose.Schema({
@@ -47,7 +50,9 @@ let books = new mongoose.Schema({
 })
 
 let usermodel = mongoose.model('usermodel',user);
-let bookModel = mongoose.model('book',books);
+let bookModel = mongoose.model('bookModel',books);
+let flowerModel = mongoose.model('flowerModel',user_flower);
 
 exports.User = usermodel;
 exports.Books = bookModel;
+exports.Flower = flowerModel;

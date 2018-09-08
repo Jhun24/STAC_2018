@@ -8,6 +8,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
 
+    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="따듯한 화분">
+    <meta property="og:description" content="원예치료를 통한 우울증 치료 솔루션. 따뜻한 화분입니다">
+    <meta property="og:image" content="/img/preview.png">
+
     <script
             src="https://code.jquery.com/jquery-3.2.1.js"
             integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
@@ -23,7 +31,7 @@
 </head>
 <body>
 
-    <div class="viewpager" id="view-pager">
+    <div class="viewpager-ward" id="view-pager">
         <div class="view">
             <div class="main-view">
                 <div class="header">
@@ -187,7 +195,8 @@
                     <h4>설정</h4>
                 </div>
                 <div class="setting-content">
-                    <div id="logout">
+
+                    <div id="logout" onclick="location.href='/'">
                         <div class="text-box">
                             <h4>로그아웃</h4>
                             <p>Warmplant님 환영합니다.</p>
@@ -198,7 +207,7 @@
                         </div>
                     </div>
 
-                    <div id="my-flower">
+                    <div id="my-flower" onclick="location.href = '/show/flower'">
                         <div class="logo-box">
                             <img src="/img/flower_pic.svg">
                         </div>
@@ -209,7 +218,7 @@
                         </div>
                     </div>
 
-                    <div id="guardian-data">
+                    <div id="guardian-data" onclick="location.href = '/show/guardian'">
                         <div class="text-box">
                             <h4>보호자 정보</h4>
                             <p>보호자의 정보를 제공합니다.</p>
@@ -219,6 +228,7 @@
                             <img src="/img/family.svg">
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

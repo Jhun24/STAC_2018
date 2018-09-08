@@ -2,11 +2,16 @@
  * Created by janghunlee on 2018. 8. 28..
  */
 
-let view_pager = document.getElementById('view-pager');
+window.onload = function () {
+
+}
 let flower_btn = document.getElementById('flower');
 let mic_btn = document.getElementById('mic');
 let book_btn = document.getElementById('book');
 let setting_btn = document.getElementById('setting');
+let view_pager = document.getElementById('view-pager');
+
+let viewpage = (document.getElementsByClassName('view').length - 1) * (-25);
 
 let now_pic_menu = flower_btn;
 
@@ -60,7 +65,7 @@ view_pager.addEventListener('touchend',function (e) {
     console.log(view_place_translateX);
 
     if(startX - finishX > 89 ){
-        if(view_place_translateX != -75){
+        if(view_place_translateX != viewpage){
             view_place_translateX = view_place_translateX - 25;
             console.log(view_place_translateX)
             view_pager.style.transitionDuration = '1s';

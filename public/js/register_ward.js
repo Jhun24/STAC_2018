@@ -11,7 +11,8 @@ register_btn.addEventListener('click',()=>{
     let name = document.getElementById('name').value;
     let gender = document.getElementById('gender').value;
 
-    if(id != null && password != null && name != null && gender != null){
+
+    if(id != '' || password != '' || name != '' || gender != ''){
 
         if(password == password_check){
             $.ajax({
@@ -21,11 +22,12 @@ register_btn.addEventListener('click',()=>{
                     id:id,
                     password:password,
                     name:name,
-                    gender:gender
+                    gender:gender,
+                    auth_type:'ward'
                 },
                 success:function (data) {
                     if(data.status == 200){
-                        location.href='/main/ward'
+                        location.href='/pairing/code'
                     }
                 },
                 error:function (err) {
