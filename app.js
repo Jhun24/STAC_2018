@@ -24,6 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(session({
+    key:'stac',
     secret:'@#@$MYSIGN#@$#$',
     resave: false,
     saveUninitialized:true

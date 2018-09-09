@@ -19,23 +19,29 @@ let user = new mongoose.Schema({
     name: { type : String },
     gender: { type : String },
     ward_id:{ type : String },
+    relationship: String ,
+    flowerpot_token : String
 });
 
 let user_flower = new mongoose.Schema({
+    flowerpot_token:String,
     temperature: {
-        normal_data: Number,
-        standard_data : Number,
-        average_date : Number
+        shame: Number,
+        text : String
     },
     flowerpot_humidity: {
-        normal_data: Number,
-        average_date : Number
+        shame: Number,
+        text : String
     },
     periphery_humidity: {
-        normal_data: Number,
-        average_date : Number
+        shame: Number,
+        text : String
     },
-    overall: { type : String }
+    overall: { type : String },
+    date:String,
+    flower_name:String,
+    flower_explain:String,
+    flower_profile_url:String,
 
 });
 

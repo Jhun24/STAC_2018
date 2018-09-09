@@ -26,8 +26,12 @@ register_btn.addEventListener('click',()=>{
                     auth_type:'ward'
                 },
                 success:function (data) {
+                    console.log(data);
                     if(data.status == 200){
                         location.href='/pairing/code'
+                    }
+                    else if(data.status == 401){
+                        Toast('이미 회원가입한 계정입니다');
                     }
                 },
                 error:function (err) {
@@ -36,10 +40,10 @@ register_btn.addEventListener('click',()=>{
             })
         }
         else{
-            alert('비밀번호 확인란을 제대로 입력해주세요');
+            Toast('비밀번호 확인란을 제대로 입력해주세요');
         }
     }
     else{
-        alert('모든 정보를 입력해주세요');
+        Toast('모든 정보를 입력해주세요');
     }
 });

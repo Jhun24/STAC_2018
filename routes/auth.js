@@ -68,65 +68,122 @@ function auth(app) {
         let token = random_string.generate();
         let auth_type = req.body.auth_type;
 
-        async.waterfall([
-            function (cb) {
-                User.find({id:id},(err,model)=>{
-                    if(err) throw err;
-                    if(model.length == 0){
-                        cb(null);
-                    }
-                    else{
-                        cb(true , "User Already Exist");
-                    }
-                });
-            },
-            function (cb) {
-                let saveUser = new User({
-                    auth_type:auth_type,
-                    id:id,
-                    password:password,
-                    name:name,
-                    token:token,
-                    gender:gender,
-                    flowerpot:{
-                        temperature: {
-                            normal_data: 0,
-                            standard_data : 0,
-                            average_date : 0
-                        },
-                        flowerpot_humidity: {
-                            normal_data: 0,
-                            average_date : 0
-                        },
-                        periphery_humidity: {
-                            normal_data: 0,
-                            average_date : 0
-                        },
-                        overall: "비어있음"
-                    }
-                });
+        let ward_id = req.body.ward_id;
+        let relationship = req.body.relationship;
 
-                saveUser.save((err,model)=>{
-                    if(err) throw err;
-                    cb(null);
-                });
-            }
-        ],function (cb , text) {
-            if(cb == true){
-                res.send({
-                    status:401,
-                    message:text
-                });
-            }
-            else if(cb == null){
-                req.session.token = token;
-                res.send({
-                    status:200,
-                    data:{
-                        token:token
-                    }
-                });
-            }
-        })
+        if(auth_type == 'ward'){
+            async.waterfall([
+                function (cb) {
+                    User.find({id:id},(err,model)=>{
+                        if(err) throw err;
+                        if(model.length == 0){
+                            cb(null);
+                        }
+                        else{
+                            cb(true , 401 , "User Already Exist");
+                        }
+                    });
+                },
+                function (cb) {
+                    let saveUser = new User({
+                        auth_type:auth_type,
+                        id:id,
+                        password:password,
+                        name:name,
+                        token:token,
+                        gender:gender,
+                    });
+
+                    saveUser.save((err,model)=>{
+                        if(err) throw err;
+                        cb(null , 200);
+                    });
+                }
+            ],function (cb , status , text) {
+                if(cb == true){
+                    res.send({
+                        status:status,
+                        message:text
+                    });
+                }
+                else if(cb == null){
+                    req.session.token = token;
+                    res.send({
+                        status:status,
+                        data:{
+                            token:token
+                        }
+                    });
+                }
+            })
+        }
+        else if(auth_type == 'guardian'){
+            async.waterfall([
+                function (cb) {
+                    User.find({id:id},(err,model)=>{
+                        if(err) throw err;
+                        if(model.length == 0){
+                            cb(null);
+                        }
+                        else{
+                            cb(true , 401 , "User Already Exist");
+                        }
+                    });
+                },
+                function (cb) {
+                    User.find({id:ward_id},(err,model)=>{
+                        if(err) throw err;
+                        if(model.length == 0){
+                            cb(true , 404 , "Ward Id Not Found");
+                        }
+                        else{
+                            cb(null);
+                        }
+                    });
+                },
+                function (cb) {
+                    let saveUser = new User({
+                        auth_type:auth_type,
+                        id:id,
+                        password:password,
+                        name:name,
+                        token:token,
+                        ward_id:ward_id,
+                        relationship:relationship
+                    });
+
+                    saveUser.save((err,model)=>{
+                        if(err) throw err;
+                        cb(null , 200);
+                    });
+                }
+            ],function (cb ,status , text) {
+                if(cb == true){
+                    res.send({
+                        status:status,
+                        message:text
+                    });
+                }
+                else if(cb == null){
+                    req.session.token = token;
+                    res.send({
+                        status:status,
+                        data:{
+                            token:token
+                        }
+                    })
+                }
+            })
+        }
+    });
+
+    app.post('/auth/logout',(req,res)=>{
+        "use strict";
+        req.session.destroy();
+        res.clearCookie('stac');
+
+        res.send({
+            status:200
+        });
     });
 }

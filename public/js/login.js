@@ -26,6 +26,9 @@ login_btn.addEventListener('click',()=>{
                         location.href = '/main/guardian'
                     }
                 }
+                else if(data.status == 401){
+                    Toast('계정이름 또는 비밀번호가 틀렸습니다.');
+                }
             },
             error:function (err) {
                 console.log(err);

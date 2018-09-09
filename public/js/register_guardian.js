@@ -16,14 +16,38 @@ guardian_btn.addEventListener('click',()=>{
     if(id != '' || password != '' || name != '' || ward_id != '' || relationship != ''){
         if(password_check == password){
             $.ajax({
-
+                method:'POST',
+                url:'/auth/register',
+                data:{
+                    id:id,
+                    password:password,
+                    name:name,
+                    ward_id:ward_id,
+                    relationship:relationship,
+                    auth_type:'guardian'
+                },
+                success:function (data) {
+                    console.log(data);
+                    if(data.status == 200){
+                        location.href='/main/guardian'
+                    }
+                    else if(data.status == 401){
+                        Toast('이미 회원가입한 계정입니다');
+                    }
+                    else if(data.status == 404){
+                        Toast('피보호자 아이디를 찾을 수 없습니다')
+                    }
+                },
+                error:function (err) {
+                    console.log(err);
+                }
             })
         }
         else{
-            alert("비밀번호가 일치하지않습니다");
+            Toast("비밀번호가 일치하지않습니다");
         }
     }
     else{
-        alert("모든 정보를 입력해주세요")
+        Toast("모든 정보를 입력해주세요")
     }
 });

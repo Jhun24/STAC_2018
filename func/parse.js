@@ -52,7 +52,7 @@ function GetBookList(i) {
     Logger.info(i+"'st Parse Start");
     let start = (i*100) + 1;
 
-    let api_url = 'https://openapi.naver.com/v1/search/book?query=' + encodeURI("우울증 치료 운동")+"&start="+start+"&display=100";
+    let api_url = 'https://openapi.naver.com/v1/search/doc?query=' + encodeURI("우울증 추천운동")+"&start="+start+"&display=100";
     let options = {
         url: api_url,
         headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
@@ -99,4 +99,5 @@ function check() {
     });
 }
 
-check();
+
+GetParseBook();
