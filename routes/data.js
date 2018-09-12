@@ -6,6 +6,7 @@ module.exports = data;
 const { User , Flower , Books } = require('../DB/schema');
 const async = require('async');
 const Logger = require('../func/color').Logger;
+const upload = require('../func/multer').upload;
 
 function data(app) {
     app.get('/data/flowerpot',(req,res)=>{
@@ -48,6 +49,38 @@ function data(app) {
                     status:status,
                     data:data
                 });
+            }
+        })
+    });
+
+    app.get('/data/user/:token',(req,res)=>{
+        "use strict";
+        let token = req.params.token;
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , 200 , model[0]);
+                    }
+                })
+            }
+        ],function (cb , status , data) {
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    status:status,
+                    data:data
+                })
             }
         })
     });
@@ -146,6 +179,58 @@ function data(app) {
                 });
             }
         });
+    });
+
+    app.post('/data/set/flower/profile',upload.single("profile"),(req,res)=>{
+        "use strict";
+        let file = req.file.filename;
+        let token = req.session.token;
+
+        console.log(file)
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , model[0]);
+                    }
+                });
+            },
+            function (user , cb) {
+                Flower.find({flowerpot_token:user.flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , 'Please Initialized FlowerPot');
+                    }
+                    else{
+                        cb(null , user.flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.update({flowerpot_token:flowerpot_token},{$set:{flower_profile_url:file}},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , file);
+                });
+            }
+        ],function (cb , status , data) {
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    status:status,
+                    data:data
+                });
+            }
+        })
     });
 
 

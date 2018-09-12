@@ -53,6 +53,7 @@ let books = new mongoose.Schema({
     description : { type : String },
     publisher : { type : String },
     price : { type : String },
+    star : { type : Number }
 })
 
 let usermodel = mongoose.model('usermodel',user);
