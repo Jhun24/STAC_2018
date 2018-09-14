@@ -42,11 +42,11 @@ window.onload = ()=>{
 
             for(let i = 0; i<10; i++){
                 let html = '<div class="book"> <div class="book-data"><div class="title">'
-                if(bookData[i].title < 11){
+                if(bookData[i].title.length < 11){
                     html += '<h4>'+bookData[i].title.replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'</h4>'
                 }
                 else{
-                    html += '<h4>'+bookData[i].title.substring(0,10).replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'</h4>'
+                    html += '<h4>'+bookData[i].title.substring(0,10).replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'...</h4>'
                 }
                 if(bookData[i].author.length < 21){
                     html += '<p>'+bookData[i].author.replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'</p>'
@@ -54,18 +54,30 @@ window.onload = ()=>{
                 else{
                     html += '<p>'+bookData[i].author.substring(0,20)+'...'.replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'</p>'
                 }
-                html += '<div class="star-box"><img src="/img/star.svg" style="width: 20px; height: 20px;"><img src="/img/star.svg" style="width: 20px; height: 20px;"><img src="/img/star.svg" style="width: 20px; height: 20px;"><img src="/img/star.svg" style="width: 20px; height: 20px;"><img src="/img/star.svg" style="width: 20px; height: 20px;"></div>'
+                html += '<div class="star-box">'
+                let star_number = parseInt(bookData[i].star / 200);
+                console.log(star_number);
+                if(star_number > 5){
+                    star_number = 5;
+                }
+                for(let i = 0; i < star_number; i++){
+                    html+= '<img src="/img/star_pic.svg">'
+                }
+                for(let i = 0; i< (5 - star_number); i++){
+                    html+= '<img src="/img/star.svg">'
+                }
+                html += '</div>'
                 html += '<p class="star-user">'+bookData[i].star+'명이 좋아합니다.</p>'
                 html += '</div>'
                 html += '<div class="img">'
                 html += '<img src="'+bookData[i].image+'">'
                 html += '</div></div>'
                 html += '<div class="book-description"><h4>책소개</h4><div>'
-                if(bookData[i].description < 131){
+                if(bookData[i].description.length < 131){
                     html += bookData[i].description.replace(/<b>/gi,'').replace(/<\/b>/gi,'');
                 }
                 else{
-                    html += bookData[i].description.substring(0,130).replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'...'
+                    html += bookData[i].description.substring(0,120).replace(/<b>/gi,'').replace(/<\/b>/gi,'')+'...'
                 }
                 html += '</div></div></div>'
 
@@ -80,6 +92,31 @@ window.onload = ()=>{
         }
     });
 }
+
+user_flower.addEventListener('click',function () {
+    $.ajax({
+        method:'GET',
+        url:'/data/flowerpot',
+        success:function (data) {
+            if(data.status == 401){
+                location.href = '/'
+            }
+            else if(data.status == 200){
+                if(data.data.flower_profile_url == undefined || data.data.flower_profile_url == null){
+                    user_flower.src = location.origin + '/img/dummy.png';
+                }
+                else{
+                    user_flower.src = location.origin + '/' + data.data.flower_profile_url;
+                }
+            }
+        },
+        error:function (err) {
+            console.log(err);
+        }
+    });
+});
+
+
 
 function get_guardian() {
     $.ajax({

@@ -13,27 +13,34 @@ function GetBookData(data) {
     let count = 0;
     asy.whilst(
         function () {
-            return count < data.length;
+            return count < 17;
         },
         function (cb) {
             console.log(count);
-            let item = data[count];
-            let saveBook = new Books({
-                title: item.title,
-                link : item.link,
-                image : item.coverSmallUrl,
-                author : item.author,
-                description : item.description,
-                publisher : item.publisher,
-                price : item.priceStandard,
-                star : (Number(item.mileage) + 100)
-            });
 
-            saveBook.save((err,model)=>{
-                if(err) throw err;
+            let item = data[count];
+            if(item.title != '82년생 김지영'){
+                let saveBook = new Books({
+                    title: item.title,
+                    link : item.link,
+                    image : item.coverSmallUrl,
+                    author : item.author,
+                    description : item.description,
+                    publisher : item.publisher,
+                    price : item.priceStandard,
+                    star : (Number(item.mileage) + 100)
+                });
+
+                saveBook.save((err,model)=>{
+                    if(err) throw err;
+                    count++;
+                    cb(null);
+                });
+            }
+            else{
                 count++;
                 cb(null);
-            });
+            }
         },
         function (err) {
             "use strict";
@@ -56,8 +63,11 @@ function check() {
 
 function sibal() {
     const API_KEY = '5034FE2854947B9D4E6FD34541D1EB693A40C3E2E70DB3529CE856FA55D1C1E2';
-    let QUERY_DATA = encodeURI('우울증');
-    let BASE_URL = 'http://book.interpark.com/api/search.api?key='+API_KEY+'&output=json&query='+QUERY_DATA;
+    const CATEGORY_ID = '101';
+
+    let BASE_URL = 'http://book.interpark.com/api/bestSeller.api?key='+API_KEY+'&output=json&categoryId='+CATEGORY_ID
+    // let QUERY_DATA = encodeURI('');
+    // let BASE_URL = 'http://book.interpark.com/api/search.api?key='+API_KEY+'&output=json&query='+QUERY_DATA;
 
     let options = {
         url:BASE_URL
@@ -67,6 +77,7 @@ function sibal() {
         "use strict";
         if(err) throw err;
         let data = JSON.parse(body);
+        console.log(data.item);
         GetBookData(data.item);
     });
 }

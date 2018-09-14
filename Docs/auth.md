@@ -90,3 +90,13 @@
 
     status : 404
     message : Ward Id Not Found
+    
+# GET : /auth/kakao
+
+> Require 
+    
+    없음
+    
+> Response
+
+    ㅗ

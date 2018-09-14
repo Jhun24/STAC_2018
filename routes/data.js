@@ -186,8 +186,6 @@ function data(app) {
         let file = req.file.filename;
         let token = req.session.token;
 
-        console.log(file)
-
         async.waterfall([
             function (cb) {
                 User.find({token:token},(err,model)=>{
@@ -228,6 +226,105 @@ function data(app) {
                 res.send({
                     status:status,
                     data:data
+                });
+            }
+        })
+    });
+
+    app.post('/data/update',(req,res)=>{
+        "use strict";
+        let flowerpot_token = req.body.flowerpot_token;
+        let data = req.body;
+        let data_obj = {
+            temperature: {
+                shame: Number,
+                text : String,
+            },
+            flowerpot_humidity: {
+                shame: Number,
+                text : String
+            },
+            periphery_humidity: {
+                shame: Number,
+                text : String
+            },
+        }
+
+        async.waterfall([
+            function (cb) {
+                Flower.find({flowerpot_token:flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null);
+                    }
+                });
+            },
+            function (cb) {
+                if(data.temperature == undefined){
+                    delete data_obj.temperature
+                }
+                else{
+                    data_obj.temperature.shame = data.temperature;
+                    if((data.temperature >= 30) || (data.temperature <= 0)){
+                        data_obj.temperature.text = '나쁨'
+                    }
+                    else if((data.temperature < 30 && data.temperature > 20) || (data.temperature > 0 && data.temperature < 10)){
+                        data_obj.temperature.text = '보통'
+                    }
+                    else if((data.temperature <= 20 && data.temperature >= 10)){
+                        data_obj.temperature.text = '좋음'
+                    }
+                }
+
+                if(data.flowerpot_humidity == undefined){
+                    delete data_obj.flowerpot_humidity
+                }
+                else{
+                    data_obj.flowerpot_humidity.shame = data.flowerpot_humidity;
+                    if((data.flowerpot_humidity < 20) || (data.flowerpot_humidity > 80)){
+                        data_obj.flowerpot_humidity.text = '나쁨';
+                    }
+                    else if((data.flowerpot_humidity >= 21 && data.flowerpot_humidity < 40) || (data.flowerpot_humidity <= 80 && data.flowerpot_humidity > 60)){
+                        data_obj.flowerpot_humidity.text = '보통';
+                    }
+                    else if((data.flowerpot_humidity >= 40 && data.flowerpot_humidity <= 60)){
+                        data_obj.flowerpot_humidity.text = '좋음';
+                    }
+                }
+
+                if(data.periphery_humidity == undefined){
+                    delete data_obj.periphery_humidity
+                }
+                else{
+                    data_obj.periphery_humidity.shame = data.periphery_humidity;
+                    if((data.periphery_humidity < 20) || (data.periphery_humidity > 80)){
+                        data_obj.periphery_humidity.text = '나쁨';
+                    }
+                    else if((data.periphery_humidity >= 21 && data.periphery_humidity < 40) || (data.periphery_humidity <= 80 && data.periphery_humidity > 60)){
+                        data_obj.periphery_humidity.text = '보통';
+                    }
+                    else if((data.periphery_humidity >= 40 && data.periphery_humidity <= 60)){
+                        data_obj.periphery_humidity.text = '좋음';
+                    }
+                }
+                console.log(data_obj)
+                cb(null);
+            },
+            function (cb) {
+                Flower.update({flowerpot_token:flowerpot_token},{$set:data_obj},(err,model)=>{
+                    if(err) throw err;
+                    console.log(model);
+                    cb(null , 200, 'Update Success');
+                });
+            }
+        ],function (cb , status , message) {
+            if(cb == true || cb == null){
+                res.send({
+                    status:status,
+                    message:message
                 });
             }
         })

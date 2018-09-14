@@ -8,7 +8,8 @@ let { User } = require('../DB/schema');
 
 passport.use('kakao',new KakaoStrategy({
     clientID: '787a1f78de2759c39c8ec598f15be3e4',
-    callbackURL: '/auth/kakao/callback'
+    callbackURL: '/auth/kakao/callback',
+    session:true
 },
     function(accessToken, refreshToken, profile, done){
         User.findOne({
@@ -60,7 +61,7 @@ function kakao(app) {
     app.get('/auth/kakao',passport.authenticate('kakao'));
 
     app.get('/auth/kakao/callback',passport.authenticate('kakao',{
-        successRedirect: '/main/ward',
+        successRedirect: '/pairing/code',
         failureRedirect: '/'
     }));
 
