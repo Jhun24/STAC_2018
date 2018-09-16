@@ -1,0 +1,8 @@
+{
+  "name": "따듯한 화분",
+  "short_name": "따듯한 화분",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_image":"/img/Splash.png"
+}

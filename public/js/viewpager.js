@@ -2,14 +2,12 @@
  * Created by janghunlee on 2018. 8. 28..
  */
 
-window.onload = function () {
-
-}
 let flower_btn = document.getElementById('flower');
 let mic_btn = document.getElementById('mic');
 let book_btn = document.getElementById('book');
 let setting_btn = document.getElementById('setting');
 let view_pager = document.getElementById('view-pager');
+let reloader = document.getElementById('reload')
 
 let viewpage = (document.getElementsByClassName('view').length - 1) * (-25);
 
@@ -18,7 +16,9 @@ let now_pic_menu = flower_btn;
 let view_place_translateX = 0;
 
 let startX = 0;
+let startY = 0;
 let finishX = 0;
+let finishY = 0;
 
 
 flower_btn.addEventListener('click',function () {
@@ -57,17 +57,16 @@ setting_btn.addEventListener('click',function () {
 
 view_pager.addEventListener('touchstart',function (e) {
     startX = e.targetTouches[0].screenX;
+    startY = e.targetTouches[0].screenY;
 });
 
 view_pager.addEventListener('touchend',function (e) {
     finishX = e.changedTouches[0].screenX;
-
-    console.log(view_place_translateX);
+    finishY = e.changedTouches[0].screenY;
 
     if(startX - finishX > 89 ){
         if(view_place_translateX != viewpage){
             view_place_translateX = view_place_translateX - 25;
-            console.log(view_place_translateX)
             view_pager.style.transitionDuration = '1s';
             view_pager.style.transform = "translateX("+view_place_translateX+"%)";
             slide_move(view_place_translateX)
@@ -80,6 +79,12 @@ view_pager.addEventListener('touchend',function (e) {
             view_pager.style.transform = "translateX("+view_place_translateX+"%)";
             slide_move(view_place_translateX)
         }
+    }
+    else if(finishY - startY > 250){
+        reload_animate(function () {
+            document.location.reload();
+        });
+
     }
 });
 
@@ -121,4 +126,11 @@ function slide_move(place) {
     now_pic_menu = slide_now_btn;
     now_pic_menu.children[0].children[0].src = now_pic_menu.children[0].children[0].src.replace('.svg','_pic.svg');
     now_pic_menu.children[0].children[1].style.color = '#2ee992';
+}
+
+function reload_animate(callback) {
+    reloader.style.display = 'flex';
+    reloader.classList.remove('animated','bounceInDown');
+    reloader.classList.add('animated','bounceInDown');
+    setTimeout(callback,2000);
 }

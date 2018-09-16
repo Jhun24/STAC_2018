@@ -5,10 +5,11 @@ let humidity_data = document.getElementById('humidity-data');
 let temperature_data = document.getElementById('temperature-data');
 let status_data = document.getElementById('status-data');
 let user_flower = document.getElementById('user-flower');
+let preloader = document.getElementById('preloader');
 
 let book_health_time_line = document.getElementById('time-line');
 
-window.onload = ()=>{
+window.onload = function () {
     "use strict";
     $.ajax({
         method:'GET',
@@ -25,7 +26,12 @@ window.onload = ()=>{
                     user_flower.src = location.origin + '/img/dummy.png';
                 }
                 else{
-                    user_flower.src = location.origin + '/' + data.data.flower_profile_url;
+                    let ImgUrl = location.origin + '/' + data.data.flower_profile_url;
+                    setFlowerImage(function () {
+                        preloader.style.display = 'none';
+                        user_flower.style.display = 'block';
+                        setBookList();
+                    },ImgUrl);
                 }
             }
         },
@@ -33,7 +39,32 @@ window.onload = ()=>{
             console.log(err);
         }
     });
+}
 
+
+
+function get_guardian() {
+    $.ajax({
+        method:'GET',
+        url:'/data/guardian',
+        success:function (data) {
+            if(data.status == 200){
+                location.href = '/show/guardian'
+            }
+            else if(data.status == 401){
+                location.href = '/';
+            }
+            else if(data.status == 404){
+                Toast('아직 보호자가 등록되지 않았습니다');
+            }
+        },
+        error:function (err) {
+
+        }
+    });
+}
+
+function setBookList() {
     $.ajax({
         method:'GET',
         url:'/books',
@@ -93,50 +124,9 @@ window.onload = ()=>{
     });
 }
 
-user_flower.addEventListener('click',function () {
-    $.ajax({
-        method:'GET',
-        url:'/data/flowerpot',
-        success:function (data) {
-            if(data.status == 401){
-                location.href = '/'
-            }
-            else if(data.status == 200){
-                if(data.data.flower_profile_url == undefined || data.data.flower_profile_url == null){
-                    user_flower.src = location.origin + '/img/dummy.png';
-                }
-                else{
-                    user_flower.src = location.origin + '/' + data.data.flower_profile_url;
-                }
-            }
-        },
-        error:function (err) {
-            console.log(err);
-        }
-    });
-});
-
-
-
-function get_guardian() {
-    $.ajax({
-        method:'GET',
-        url:'/data/guardian',
-        success:function (data) {
-            if(data.status == 200){
-                location.href = '/show/guardian'
-            }
-            else if(data.status == 401){
-                location.href = '/';
-            }
-            else if(data.status == 404){
-                Toast('아직 보호자가 등록되지 않았습니다');
-            }
-        },
-        error:function (err) {
-
-        }
-    });
+function setFlowerImage(callback , ImgUrl) {
+    user_flower.src = ImgUrl;
+    setTimeout(callback,1000);
 }
 
 function logout() {

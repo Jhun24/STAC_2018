@@ -45,6 +45,7 @@ require('./routes/data')(app);
 require('./routes/books')(app);
 require('./routes/kakak_passport')(app);
 require('./routes/route')(app);
+require('./routes/assistant')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

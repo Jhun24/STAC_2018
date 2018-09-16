@@ -1,0 +1,41 @@
+{
+  "name": "따뜻한 화분",
+  "short_name": "따뜻한 화분",
+  "icons": [{
+    "src": "/img/book.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/book_pic.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/flower.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/flower_pic.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/mic.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/mic_pic.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/setting.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },{
+    "src": "/img/setting_pic.svg",
+    "sizes": "20x20",
+    "type": "image/svg"
+  },],
+  "scope": "/racer/",
+  "start_url": "/racer/start.html",
+  "display": "fullscreen",
+  "orientation": "landscape"
+}

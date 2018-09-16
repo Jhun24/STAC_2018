@@ -1,0 +1,55 @@
+@import "flex.less";
+
+//* {
+//  margin: 0;
+//  padding: 0;
+//}
+//*, *:before, *:after {
+//  -webkit-box-sizing: border-box;
+//  -moz-box-sizing: border-box;
+//  box-sizing: border-box;
+//}
+
+.reloadSingle {
+  display: inline-block;
+  position: relative;
+  -webkit-animation: rotate 1.5s linear infinite;
+  animation: rotate 1.5s linear infinite;
+}
+small {
+  display: block;
+  line-height: 2.25em;
+}
+
+// Single
+#reload{
+  background-color: #fff;
+  position: absolute;
+  border-radius: 100%;
+  left:calc(~"50% - 25px");
+  top:6%;
+  box-shadow: 1px 1px 1px 1px #d8d8d8 ,0em 0 0.4em  #d8d8d8;
+
+  width:40px;
+  height:40px;
+
+  .flex-center;
+
+  display: none;
+
+  & > img{
+    width:25px;
+    height:25px;
+
+    animation: rotate 1.5s linear infinite;
+  }
+}
+
+
+
+@-webkit-keyframes rotate {
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
