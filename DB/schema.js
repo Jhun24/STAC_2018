@@ -25,6 +25,7 @@ let user = new mongoose.Schema({
 
 let user_flower = new mongoose.Schema({
     flowerpot_token:String,
+    name:String,
     temperature: {
         shame: Number,
         text : String

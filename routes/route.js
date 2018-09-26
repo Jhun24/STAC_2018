@@ -57,4 +57,10 @@ function route(app) {
         res.render('pairing.html');
     });
 
+
+    app.get("/pairing/name",(req,res)=>{
+        "use strict";
+        res.render('name.html');
+    });
+
 }

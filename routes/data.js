@@ -9,6 +9,181 @@ const Logger = require('../func/color').Logger;
 const upload = require('../func/multer').upload;
 
 function data(app) {
+
+    app.post('/data/add/name',(req,res)=>{
+        "use strict";
+        let token = req.session.token;
+        let name = req.body.name;
+
+        console.log(name);
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , model[0].flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.find({flowerpot_token:flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , 'Unauthorized Flowerpot Token');
+                    }
+                    else{
+                        cb(null , flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.update({flowerpot_token:flowerpot_token},{$set:{flower_name:name}},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , 'Update Success');
+                });
+            }
+        ],function (cb , status , message) {
+            if(cb == true || cb == null){
+                res.send({
+                    status:status,
+                    message:message
+                });
+            }
+        });
+    });
+
+    app.post('/data/add/flowerpot',(req,res)=>{
+        "use strict";
+        let token = req.session.token;
+        let flowerpot_token = req.body.flowerpot_token;
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null);
+                    }
+                });
+            },
+            function (cb) {
+                Flower.find({flowerpot_token:flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , 'Unauthorized Flowerpot Token');
+                    }
+                    else{
+                        cb(null);
+                    }
+                });
+            },
+            function (cb) {
+                User.update({token:token},{$set:{flowerpot_token:flowerpot_token}},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , 'Update Success');
+                });
+            }
+        ],function (cb , status , message) {
+            if(cb == true || cb == null){
+                res.send({
+                    status:status,
+                    message:message
+                });
+            }
+        })
+    });
+
+    app.post('/data/update',(req,res)=>{
+        "use strict";
+        let token = req.session.token;
+        let name = req.body.name;
+        let explain = req.body.explain;
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , model[0].flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.find({flowerpot_token:flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , 'Please Add Your FlowerPot KeyCode');
+                    }
+                    else{
+                        cb(null , flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.update({flowerpot_token:flowerpot_token},{$set:{flower_name:name,flower_explain:explain}},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , 'Update Success');
+                });
+            }
+        ],function (cb , status , message) {
+            if(cb == true || cb == null){
+                res.send({
+                    status:status,
+                    message:message
+                });
+            }
+        })
+    });
+
+    app.post("/data/flowerpot/name",(req,res)=>{
+        "use strict";
+        let flower_name = req.body.flower_name;
+        let token = req.session.token;
+
+        async.waterfall([
+            function (cb) {
+                User.find({token:token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , model[0].flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.update({flowerpot_token:flowerpot_token},{$set:{name:flower_name}},(err,model)=>{
+                    if(err) throw err;
+                    cb(null , 200 , 'Update Success');
+                });
+            }
+        ],function (cb , status , data) {
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    status:status,
+                    message:data
+                })
+            }
+        })
+    });
+
     app.get('/data/flowerpot',(req,res)=>{
         "use strict";
         let token = req.session.token;
