@@ -37,6 +37,8 @@ window.onload = ()=>{
                 }
                 else{
                     user_flower.src = location.origin + "/"+data.data.flower_profile_url;
+                    user_flower.style.width = '160px';
+                    user_flower.style.height = '160px';
                 }
             }
         },
