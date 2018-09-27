@@ -410,6 +410,7 @@ function data(app) {
         "use strict";
         let flowerpot_token = req.body.flowerpot_token;
         let data = req.body;
+        let name = '';
         let data_obj = {
             temperature: {
                 shame: Number,
@@ -433,6 +434,7 @@ function data(app) {
                         cb(true , 401 , 'Unauthorized Token');
                     }
                     else{
+                        name = model[0].flowerpot_name;
                         cb(null);
                     }
                 });
@@ -496,10 +498,17 @@ function data(app) {
                 });
             }
         ],function (cb , status , message) {
-            if(cb == true || cb == null){
+            if(cb == true){
                 res.send({
                     status:status,
                     message:message
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    status:status,
+                    message:message,
+                    name:name
                 });
             }
         })
