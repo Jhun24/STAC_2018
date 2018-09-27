@@ -26,6 +26,9 @@ login_btn.addEventListener('click',()=>{
                         location.href = '/main/guardian'
                     }
                 }
+                else if(data.status == 403){
+                    Toast('기기를 등록해주세요');
+                }
                 else if(data.status == 401){
                     Toast('계정이름 또는 비밀번호가 틀렸습니다.');
                 }

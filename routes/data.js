@@ -510,7 +510,7 @@ function data(app) {
         "use strict";
         async.waterfall([
             function (cb) {
-                User.find({id:'test_user'},(err,model)=>{
+                Flower.find({flowerpot_token:'ward1234ward1234'},(err,model)=>{
                     if(err) throw err;
                     if(model.length == 0){
                         cb(null);
@@ -519,22 +519,6 @@ function data(app) {
                         cb(true);
                     }
                 })
-            },
-            function (cb) {
-                let saveUser = new User({
-                    auth_type : 'ward',
-                    id: 'user',
-                    password: '1234',
-                    token: 'test',
-                    name: 'ward_test',
-                    gender: '남자',
-                    flowerpot_token : 'ward1234ward1234'
-                });
-
-                saveUser.save((err,model)=>{
-                    if(err) throw err;
-                    cb(null);
-                });
             },
             function (cb) {
                 let date = new Date().getFullYear() + "년 "+new Date().getMonth()+"월 "+ new Date().getDate()+"일";
@@ -553,8 +537,8 @@ function data(app) {
                         text : '나쁨'
                     },
                     overall: '보통',
-                    flower_name:'그루트',
-                    flower_explain:'아이엠그루트',
+                    flower_name:'',
+                    flower_explain:'설명을 입력해주세요',
                     date:date
                 });
 

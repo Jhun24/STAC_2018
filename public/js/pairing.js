@@ -20,8 +20,13 @@ pairing_btn.addEventListener('click',()=>{
             flowerpot_token:flowerpot_token
         },
         success:function (data) {
+            console.log(data);
             if(data.status == 200){
                 location.href='/pairing/name'
+            }
+            else if(data.status == 404){
+                console.log(Toast);
+                Toast('올바르지 않은 기기코드입니다');
             }
         },
         error:function (err) {

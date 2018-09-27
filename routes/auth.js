@@ -25,7 +25,14 @@ function auth(app) {
                     status:401,
                     message:"Fail to /auth/login",
                 });
-            }else{
+            }
+            else if(model[0].flowerpot_token == undefined){
+                res.send({
+                    status:403,
+                    message:'기기를 등록해주세요'
+                })
+            }
+            else{
                 req.session.token = model[0].token;
                 res.send({
                     status:200,
