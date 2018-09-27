@@ -93,7 +93,7 @@ save.addEventListener('click',()=>{
 
     $.ajax({
         method:'POST',
-        url:'/data/update',
+        url:'/data/update/name',
         data:{
             name:name,
             explain:explain

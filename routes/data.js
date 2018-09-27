@@ -100,7 +100,7 @@ function data(app) {
         })
     });
 
-    app.post('/data/update',(req,res)=>{
+    app.post('/data/update/name',(req,res)=>{
         "use strict";
         let token = req.session.token;
         let name = req.body.name;

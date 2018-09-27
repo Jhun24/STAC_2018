@@ -22,7 +22,7 @@ window.onload = function () {
                 humidity_data.innerHTML = data.data.flowerpot_humidity.text;
                 temperature_data.innerHTML = data.data.temperature.text;
                 status_data.innerHTML = data.data.overall;
-                console.log(data.data.flower_profile_url)
+
                 if(data.data.flower_profile_url == undefined || data.data.flower_profile_url == null){
                     user_flower.src = location.origin + '/img/dummy.png';
                     setBookList();
@@ -71,7 +71,6 @@ function setBookList() {
         method:'GET',
         url:'/books',
         success:function (data) {
-            console.log(data);
             let bookData = data.data;
 
             for(let i = 0; i<10; i++){
