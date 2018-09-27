@@ -507,8 +507,8 @@ function data(app) {
             else if(cb == null){
                 res.send({
                     status:status,
-                    message:message,
-                    name:name
+                    name:name,
+                    message:message
                 });
             }
         })
