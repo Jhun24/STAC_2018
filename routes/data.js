@@ -434,7 +434,7 @@ function data(app) {
                         cb(true , 401 , 'Unauthorized Token');
                     }
                     else{
-                        name = model[0].flowerpot_name;
+                        name = model[0].flower_name;
                         cb(null);
                     }
                 });
