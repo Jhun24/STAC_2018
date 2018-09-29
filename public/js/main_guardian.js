@@ -110,7 +110,7 @@ window.onload = function () {
                 bad.innerHTML = data.data.bad;
                 status.innerHTML = data.data.overall;
                 let checkDate = Number(data.data.date.split(' ')[2].replace("일", ''));
-                date.innerHTML = (checkDate);
+                date.innerHTML = (new Date().getDate() - checkDate);
             }
         },
         error:function (err) {
