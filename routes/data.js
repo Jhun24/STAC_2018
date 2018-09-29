@@ -593,16 +593,16 @@ function data(app) {
                 let saveFlower = new Flower({
                     flowerpot_token:'ward1234ward1234',
                     temperature: {
-                        shame: 20,
-                        text : '좋음',
+                        shame: 0,
+                        text : '보통',
                     },
                     flowerpot_humidity: {
-                        shame: 20,
-                        text : '나쁨'
+                        shame: 0,
+                        text : '보통'
                     },
                     periphery_humidity: {
-                        shame: 10,
-                        text : '나쁨'
+                        shame: 0,
+                        text : '보통'
                     },
                     overall: '보통',
                     flower_name:'',
