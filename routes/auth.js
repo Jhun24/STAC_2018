@@ -26,7 +26,7 @@ function auth(app) {
                     message:"Fail to /auth/login",
                 });
             }
-            else if(model[0].flowerpot_token == undefined){
+            else if(model[0].flowerpot_token == undefined && model[0].auth_type != 'guardian'){
                 res.send({
                     status:403,
                     message:'기기를 등록해주세요'

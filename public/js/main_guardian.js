@@ -2,12 +2,13 @@
  * Created by janghunlee on 2018. 8. 28..
  */
 
-window.onload = function () {
-
-}
 let flower_btn = document.getElementById('flower');
 let setting_btn = document.getElementById('setting');
 let view_pager = document.getElementById('view-pager');
+
+let bad = document.getElementById('bad-data');
+let date = document.getElementById('use-data');
+let status = document.getElementById('status-data');
 
 let viewpage = (document.getElementsByClassName('view').length - 1) * (-50);
 
@@ -97,4 +98,23 @@ function slide_move(place) {
     now_pic_menu = slide_now_btn;
     now_pic_menu.children[0].children[0].src = now_pic_menu.children[0].children[0].src.replace('.svg','_pic.svg');
     now_pic_menu.children[0].children[1].style.color = '#2ee992';
+}
+
+window.onload = function () {
+    $.ajax({
+        method:'GET',
+        url:'/data/ward/flowerpot',
+        success:function (data) {
+            console.log(data.data)
+            if(data.status == 200){
+                bad.innerHTML = data.data.bad;
+                status.innerHTML = data.data.overall;
+                let checkDate = Number(data.data.date.split(' ')[2].replace("일", ''));
+                date.innerHTML = (checkDate);
+            }
+        },
+        error:function (err) {
+            console.log(err);
+        }
+    })
 }

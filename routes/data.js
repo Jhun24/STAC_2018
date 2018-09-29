@@ -260,6 +260,65 @@ function data(app) {
         })
     });
 
+    app.get('/data/ward/flowerpot',(req,res)=>{
+        "use strict";
+        let token = req.session.token;
+
+        async.waterfall([
+            function (cb) {
+                User.find({
+                    token:token
+                },(err,model)=>{
+                    if(err) throw err;
+
+                    if(model.length == 0){
+                        cb(true , 401 , 'Unauthorized Token');
+                    }
+                    else{
+                        cb(null , model[0].ward_id);
+                    }
+                });
+            },
+            function (id , cb) {
+                User.find({
+                    id:id
+                },(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , "Ward Not Found");
+                    }
+                    else{
+                        cb(null , model[0].flowerpot_token);
+                    }
+                });
+            },
+            function (flowerpot_token , cb) {
+                Flower.find({flowerpot_token:flowerpot_token},(err,model)=>{
+                    if(err) throw err;
+                    if(model.length == 0){
+                        cb(true , 404 , 'Flowerpot Not Found');
+                    }
+                    else{
+                        cb(null , 200 , model[0]);
+                    }
+                });
+            }
+        ],function (cb , status , data) {
+            if(cb == true){
+                res.send({
+                    status:status,
+                    message:data
+                });
+            }
+            else if(cb == null){
+                res.send({
+                    status:status,
+                    data:data
+                });
+            }
+        });
+    });
+
     app.get('/data/ward',(req,res)=>{
         "use strict";
         let token = req.session.token;
@@ -548,6 +607,7 @@ function data(app) {
                     overall: '보통',
                     flower_name:'',
                     flower_explain:'설명을 입력해주세요',
+                    bad:0,
                     date:date
                 });
 

@@ -40,6 +40,7 @@ let user_flower = new mongoose.Schema({
     },
     overall: { type : String },
     date:String,
+    bad:Number,
     flower_name:String,
     flower_explain:String,
     flower_profile_url:String,
